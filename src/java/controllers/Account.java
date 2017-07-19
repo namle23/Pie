@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-import utils.ValidateLogin;
+import utils.AccountAction;
 
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "Account", urlPatterns = {"/Account"})
+public class Account extends HttpServlet {
 
     private DataSource ds;
 
@@ -65,7 +65,7 @@ public class Login extends HttpServlet {
             throw new ServletException();
         }
 
-        ValidateLogin vl = new ValidateLogin(conn);
+        AccountAction accountAction = new AccountAction(conn);
 
         if (action.equals("dologin")) {
             String username = request.getParameter("username");
@@ -77,9 +77,10 @@ public class Login extends HttpServlet {
             request.setAttribute("password", "");
 
             try {
-                if (vl.login(username, password)) {
+                if (accountAction.login(username, password)) {
                     request.getRequestDispatcher("/Welcome").forward(request, response);
                 } else {
+                    request.setAttribute("message", "Check username or password.");
                     request.getRequestDispatcher("/login.jsp").forward(request, response);
                 }
             } catch (SQLException ex) {
@@ -100,19 +101,27 @@ public class Login extends HttpServlet {
             request.setAttribute("newaddress", newaddress);
             request.setAttribute("newphone", newphone);
 
+            request.setAttribute("message", "");
+
             if (!newpassword1.equals(newpassword2)) {
+                //Password not match
+                request.setAttribute("message", "Password not match.");
                 request.getRequestDispatcher("/register.jsp").forward(request, response);
             } else {
                 Users user = new Users(newusername, newpassword1, newfullname, newaddress, newphone);
 
                 if (!user.validate()) {
+                    //Password wrong format
+                    request.setAttribute("message", user.getMessage());
                     request.getRequestDispatcher("/register.jsp").forward(request, response);
                 } else {
                     try {
-                        if (vl.exists(newusername)) {
+                        if (accountAction.exists(newusername)) {
+                            //Username exists
+                            request.setAttribute("message", "Username is taken.");
                             request.getRequestDispatcher("/register.jsp").forward(request, response);
                         } else {
-                            vl.create(newusername, newpassword1, newfullname, newaddress, newphone);
+                            accountAction.create(newusername, newpassword1, newfullname, newaddress, newphone);
                             request.getRequestDispatcher("/success.jsp").forward(request, response);
                         }
                     } catch (SQLException e) {
@@ -126,7 +135,7 @@ public class Login extends HttpServlet {
         try {
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

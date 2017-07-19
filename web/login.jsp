@@ -23,15 +23,13 @@
                     <h1 class="login">Login</h1>
                 </div>
 
-                <form action="${pageContext.request.contextPath}/Login?action=dologin" method="post">
+                <form action="${pageContext.request.contextPath}/Account?action=dologin" method="post">
                     <input type="hidden" name="action" value="dologin">
-
-                    <!--LOGIN FAIL CASE HANDLER-->
-
                     <input type="text" name="username" placeholder="username"><br>
                     <input type="password" name="password" placeholder="password"><br>
                     <input class="btn" type="submit" value="Login"><br>
-                    <a class="btn" href="#">Forgot password?</a>
+                    <a class="btn" href="admin/index.jsp">Admin login</a>
+                    <!--<a class="btn" href="#">Forgot password?</a>-->
                 </form>
             </div>
 

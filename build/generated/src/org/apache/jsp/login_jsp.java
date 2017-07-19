@@ -117,15 +117,13 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                <form action=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("/Login?action=dologin\" method=\"post\">\n");
+      out.write("/Account?action=dologin\" method=\"post\">\n");
       out.write("                    <input type=\"hidden\" name=\"action\" value=\"dologin\">\n");
-      out.write("\n");
-      out.write("                    <!--LOGIN FAIL CASE HANDLER-->\n");
-      out.write("\n");
       out.write("                    <input type=\"text\" name=\"username\" placeholder=\"username\"><br>\n");
       out.write("                    <input type=\"password\" name=\"password\" placeholder=\"password\"><br>\n");
       out.write("                    <input class=\"btn\" type=\"submit\" value=\"Login\"><br>\n");
-      out.write("                    <a class=\"btn\" href=\"#\">Forgot password?</a>\n");
+      out.write("                    <a class=\"btn\" href=\"admin/index.jsp\">Admin click here</a>\n");
+      out.write("                    <!--<a class=\"btn\" href=\"#\">Forgot password?</a>-->\n");
       out.write("                </form>\n");
       out.write("            </div>\n");
       out.write("\n");

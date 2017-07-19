@@ -6,7 +6,7 @@
         <div class="side-content">
             <h2 class="login">Login</h2>
             <br>
-            <form action="${pageContext.request.contextPath}/Login?action=dologin" method="post">
+            <form action="${pageContext.request.contextPath}/Account?action=dologin" method="post">
                 <input type="hidden" name="action" value="dologin">
 
                 <input type="text" name="username" placeholder="Username"><br>

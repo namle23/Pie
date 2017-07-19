@@ -52,6 +52,9 @@ public class Users implements Serializable {
     @Column(name = "purchased")
     private int purchased;
 
+    //Message to display
+    private String message;
+
     public Users() {
     }
 
@@ -81,6 +84,10 @@ public class Users implements Serializable {
         this.fullName = fullName;
         this.address = address;
         this.phone = phone;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public Integer getId() {
@@ -174,14 +181,21 @@ public class Users implements Serializable {
 
     //validate user
     public boolean validate() {
-        if (username == null || password == null || fullName == null
-                || address == null || phone == null) {
+        if (username == null) {
+            message = "Username cannot empty";
+            return false;
+        }
+
+        if (password == null) {
+            message = "Password cannot empty";
             return false;
         }
 
         if (password.length() < 8) {
+            message = "Password must be at least 8 characters.";
             return false;
         } else if (password.matches("\\w*\\s+\\w*")) {
+            message = "Password cannot contain space.";
             return false;
         }
 
