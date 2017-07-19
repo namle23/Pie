@@ -63,6 +63,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
@@ -116,10 +117,13 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                    <form class=\"register\" action=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("/Login?action=register\" method=\"post\">\n");
-      out.write("                        <input type=\"hidden\" name=\"action\" value=\"register\">\n");
-      out.write("                        <!--VERIFY CODE GOES HERE-->\n");
+      out.write("/Account?action=register\" method=\"post\">\n");
       out.write("\n");
+      out.write("                        <p class=\"prompt\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${message}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</p>\n");
+      out.write("\n");
+      out.write("                        <input type=\"hidden\" name=\"action\" value=\"register\">\n");
       out.write("                        <p>Username</p>\n");
       out.write("                        <input type=\"text\" name=\"newusername\" value=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${users.username}", java.lang.String.class, (PageContext)_jspx_page_context, null));
@@ -147,8 +151,6 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\n");
       out.write("\n");
       out.write("            <div id=\"sidebar\">\n");
-      out.write("                ");
-      out.write("\n");
       out.write("\n");
       out.write("                ");
       out.write("<!--COUNT THE AMOUNT OF ITEMS GOES HERE-->\n");

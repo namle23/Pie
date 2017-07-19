@@ -22,12 +22,13 @@
                 <div class="main-content content">
                     <h1 class="register">Register</h1>
 
-                    <form class="register" action="${pageContext.request.contextPath}/Login?action=register" method="post">
-                        <input type="hidden" name="action" value="register">
-                        <!--VERIFY CODE GOES HERE-->
+                    <form class="register" action="${pageContext.request.contextPath}/Account?action=register" method="post">
 
+                        <p class="prompt">${message}</p>
+
+                        <input type="hidden" name="action" value="register">
                         <p>Username</p>
-                        <input type="text" name="newusername" value="${users.username}" placeholder="Pick an username"><br>
+                        <input type="text" name="newusername" value="${users.username}" placeholder="Pick username"><br>
                         <p>Password</p>
                         <input type="password" name="newpassword1" placeholder="Enter password"><br>
                         <p>Re-enter password</p>
@@ -45,7 +46,6 @@
             </div>
 
             <div id="sidebar">
-                <%--<%@include file="parts/login.jsp"%>--%>
 
                 <%@include file="parts/cart.jsp"%>
 
