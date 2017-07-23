@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="parts/head.jsp"%>
     </head>
+
     <body id="register">
         <div><%@include file="parts/header.jsp"%></div>
 
@@ -21,16 +22,18 @@
 
                 <div class="main-content content">
                     <h1 class="login">Login</h1>
-                </div>
 
-                <form action="${pageContext.request.contextPath}/Account?action=dologin" method="post">
-                    <input type="hidden" name="action" value="dologin">
-                    <input type="text" name="username" placeholder="username"><br>
-                    <input type="password" name="password" placeholder="password"><br>
-                    <input class="btn" type="submit" value="Login"><br>
-                    <a class="btn" href="admin/index.jsp">Admin login</a>
-                    <!--<a class="btn" href="#">Forgot password?</a>-->
-                </form>
+                    <form class="register" action="${pageContext.request.contextPath}/Account?action=dologin" method="post">
+                        <p class="promtp">${message}</p>
+
+                        <input type="hidden" name="action" value="dologin">
+                        <input type="text" name="username" placeholder="username"><br>
+                        <input type="password" name="password" placeholder="password"><br>
+                        <input class="btn" type="submit" value="Login"><br>
+                        <a class="btn" href="admin/index.jsp">Admin login</a>
+                        <!--<a class="btn" href="#">Forgot password?</a>-->
+                    </form>
+                </div>
             </div>
 
             <div id="sidebar">

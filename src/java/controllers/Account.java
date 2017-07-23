@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import utils.AccountAction;
 
@@ -61,7 +62,7 @@ public class Account extends HttpServlet {
 
         try {
             conn = ds.getConnection();
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
             throw new ServletException();
         }
 
@@ -73,12 +74,14 @@ public class Account extends HttpServlet {
 
             Users user = new Users(username, password);
 
-            request.setAttribute("username", username);
-            request.setAttribute("password", "");
+            HttpSession session = request.getSession(); //Set session for user
+
+            session.setAttribute("username", username);
+            session.setAttribute("password", "");
 
             try {
                 if (accountAction.login(username, password)) {
-                    request.getRequestDispatcher("/Welcome").forward(request, response);
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
                 } else {
                     request.setAttribute("message", "Check username or password.");
                     request.getRequestDispatcher("/login.jsp").forward(request, response);
@@ -130,6 +133,9 @@ public class Account extends HttpServlet {
                 }
             }
 
+        } else if (action.equals("dologout")) {
+            request.getSession().invalidate();
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
         }
 
         try {

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,22 +23,29 @@
 
                 <div class="main-content content shop">
                     <div id="search">
-                        <form action="" method="post"><!--SEARCH CONTROLLER GOES HERE-->
+                        <form action="${pageContext.request.contextPath}/Shop?search=${search}" method="post"><!--SEARCH ACTION GOES HERE-->
                             <input class="text" type="text" name="search" placeholder="Search product">
                             <input class="button" type="submit" value="Go!">
                         </form>
                     </div>
 
+                    <input type="hidden" name="page" value="1">
+
                     <h1 class="shop-title">Happy Chefs</h1>
 
-                    <!--SEARCH RESULT GOES HERE-->
-
+                    <c:choose>
+                        <c:when test="${type != null}">
+                            <p class="prompt">Product type: <b>${type}</b></p>
+                        </c:when>
+                        <c:when test="${search != null}">
+                            <p class="prompt">Search result: <b>${search}</b></p>
+                        </c:when>
+                    </c:choose>
 
                 </div>
             </div>
 
             <div id="sidebar">
-                <%--<%@include file="parts/login.jsp"%>--%>
 
                 <%@include file="parts/cart.jsp"%>
 

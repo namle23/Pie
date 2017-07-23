@@ -27,7 +27,6 @@
                         <img class="thumb-img" src="images/articles/article1_thumb.jpg" width="100" height="100">
                         <p class="article-time">11/11/2017 8:00am</p>
                         <p><b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In purus orci, lacinia in ullamcorper sit amet, hendrerit id velit. In luctus luctus rutrum. </b></p>
-
                     </div>
 
                     <div class="content-box">

@@ -15,6 +15,7 @@
         <div class="wrapper">
             <div id="main-content">
                 <div class="main-content top"></div>
+
                 <div class="main-content content articles">
                     <h1 class="about">About Happy Chefs</h1>
                 </div>

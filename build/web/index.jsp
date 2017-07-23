@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +13,7 @@
 
         <div class="wrapper">
             <div id="main-content">
+
                 <div class="main-content top"></div>
 
                 <div class="main-content content">
@@ -21,11 +23,18 @@
                         <div class="pin-1"></div>
                         <div id="ribbon"></div>
                         <div id="slideshow">
-                            <!--ADD PRODUCT TO SLIDESHOW-->
+                            <!--add images to slideshow-->
+                            <sql:setDataSource var="ds" dataSource="jdbc/dbs"></sql:setDataSource>
+                            <sql:query var="result" sql="SELECT * FROM images ORDER BY id LIMIT 8" dataSource="${ds}"></sql:query>
+
+                            <c:forEach var="img" items="${result.rows}">
+                                <c:set scope="application" var="imagename" value="${img.id}_slide.${img.image_extension}"></c:set>
+                                <img src="${pageContext.request.contextPath}/images/products/${imagename}">
+                            </c:forEach>
                         </div>
                     </div>
 
-                    <h1 class="articles">New</h1>
+                    <h1 class="articles">New articles</h1>
 
                     <c:forEach var="i" begin="1" end="2">
                         <div class="articles-thumb">
@@ -46,13 +55,14 @@
             </div>
 
             <div id="sidebar">
-                <%@include file="parts/login.jsp"%>
+                <%--<%@include file="parts/login.jsp"%>--%>
 
                 <%@include file="parts/cart.jsp"%>
 
                 <%@include file="parts/menu.jsp"%>
             </div>
-        </div>
+        </div> <!--end wrapper-->
+
         <%@include file="parts/footer.jsp"%>
     </body>
 </html>

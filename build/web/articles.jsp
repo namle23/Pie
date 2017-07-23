@@ -21,7 +21,7 @@
 
                 <div class="main-content content articles">
                     <div id="search">
-                        <form action="search-result.jsp"> <!--SEARCH SERVLET GOES HERE-->
+                        <form action="search-result.jsp"> <!--SEARCH RESULT GOES HERE-->
                             <input class="text" type="text" name="search-articles" placeholder="Search articles">
                             <input class="button" type="submit" value="Search">
                         </form>
@@ -40,12 +40,12 @@
                     </c:forEach>
 
                     <ul class="pages-divide">
-                        <li><a class="nav-pre" href="#"><-Previous</a></li>
+                        <li><a class="nav-pre" href="#">Previous</a></li>
 
                         <c:forEach var="i" begin="1" end="9">
                             <li><a href="#">${i}</a></li>
                             </c:forEach>
-                        <li><a class="nav-next" href="#">Next-></a></li>
+                        <li><a class="nav-next" href="#">Next</a></li>
                     </ul>
 
                 </div>
