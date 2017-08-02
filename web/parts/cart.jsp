@@ -5,6 +5,6 @@
 
     <div class="side-content">
         <h2 class="cart">Items: </h2>
-        <a class="btn reg" href="cart.jsp">All products</a>
+        <a class="btn reg" href="cart.jsp">Your order</a>
     </div>
 </div>

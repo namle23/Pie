@@ -17,12 +17,13 @@
                 <div class="main-content top"></div>
 
                 <div class="main-content content articles">
-                    <h1 class="about">About Happy Chefs</h1>
+                    <h1 class="about">Developed by: Nam Le</h1>
+                    <img src="${pageContext.request.contextPath}/images/about.jpg">
                 </div>
             </div>
 
             <div id="sidebar">
-                <%--<%@include file="parts/login.jsp"%>--%>
+                <%@include file="parts/login.jsp"%>
 
                 <%@include file="parts/cart.jsp"%>
 

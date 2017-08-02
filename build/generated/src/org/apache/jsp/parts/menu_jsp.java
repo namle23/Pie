@@ -57,29 +57,29 @@ public final class menu_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("<div class=\"part\">\n");
-      out.write("    <div class=\"sidebar top\"></div>\n");
-      out.write("\n");
-      out.write("    <div class=\"side-content\">\n");
-      out.write("        <h2 class=\"menu\">Cake by type</h2>\n");
-      out.write("\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("<div class=\"part\">\r\n");
+      out.write("    <div class=\"sidebar top\"></div>\r\n");
+      out.write("\r\n");
+      out.write("    <div class=\"side-content\">\r\n");
+      out.write("        <h2 class=\"menu\">Cake by type</h2>\r\n");
+      out.write("\r\n");
       out.write("        ");
       if (_jspx_meth_sql_setDataSource_0(_jspx_page_context))
         return;
-      out.write("\n");
+      out.write("\r\n");
       out.write("        ");
       if (_jspx_meth_sql_query_0(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("        ");
       if (_jspx_meth_c_forEach_0(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("    </div>\n");
+      out.write("\r\n");
+      out.write("    </div>\r\n");
       out.write("</div>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
@@ -121,7 +121,7 @@ public final class menu_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.sql.QueryTag _jspx_th_sql_query_0 = (org.apache.taglibs.standard.tag.rt.sql.QueryTag) _jspx_tagPool_sql_query_var_sql_dataSource_nobody.get(org.apache.taglibs.standard.tag.rt.sql.QueryTag.class);
     _jspx_th_sql_query_0.setPageContext(_jspx_page_context);
     _jspx_th_sql_query_0.setParent(null);
-    _jspx_th_sql_query_0.setVar("result");
+    _jspx_th_sql_query_0.setVar("results");
     _jspx_th_sql_query_0.setDataSource((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ds}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     _jspx_th_sql_query_0.setSql("SELECT DISTINCT type FROM products ORDER BY type");
     int[] _jspx_push_body_count_sql_query_0 = new int[] { 0 };
@@ -150,19 +150,30 @@ public final class menu_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
     _jspx_th_c_forEach_0.setParent(null);
     _jspx_th_c_forEach_0.setVar("type");
-    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${result.rows}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${results.rows}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
     try {
       int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
       if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
-          out.write("\n");
-          out.write("            <a class=\"menu\" href=\"shop.jsp?type=");
+          out.write("\r\n");
+          out.write("            <form action=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("/Shop?type=");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${type.type}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("\" method=\"get\">\r\n");
+          out.write("                <input type=\"hidden\" name=\"type\" value=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${type.type}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("\">\r\n");
+          out.write("                <a class=\"menu\" href=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("/Shop?type=");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${type.type}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write('"');
           out.write('>');
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${type.type}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</a><br>\n");
+          out.write("</a><br>\r\n");
+          out.write("            </form>\r\n");
           out.write("        ");
           int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)

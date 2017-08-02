@@ -3,8 +3,6 @@ package controllers;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -39,17 +37,6 @@ public class Shop extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String page = request.getParameter("page");
-        int pageInt = Integer.parseInt(page);
-
-        if (pageInt != 1) {
-            pageInt = Integer.parseInt(page);
-        } else {
-            pageInt = 1;
-        }
-
-        int limit = 6;
-        int start_prd = (pageInt - 1) * limit;
 
         Connection conn = null;
 
@@ -63,32 +50,23 @@ public class Shop extends HttpServlet {
 
         String type = request.getParameter("type");
 
-        request.setAttribute("type", type);
-
         //set display with type
         if (type != null) {
-            try {
-                shopAction.displayWithType(pageInt, start_prd, type);
-            } catch (SQLException ex) {
-                Logger.getLogger(Shop.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            shopAction.displayWithType(1, type);
+            request.getRequestDispatcher("/shop.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String page = request.getParameter("page");
-        int pageInt = Integer.parseInt(page);
+        String action = request.getParameter("action");
 
-        if (pageInt != 1) {
-            pageInt = Integer.parseInt(page);
-        } else {
-            pageInt = 1;
+        if (action == null) {
+            return;
         }
-
-        int limit = 6;
-        int start_prd = (pageInt - 1) * limit;
 
         Connection conn = null;
 
@@ -100,17 +78,14 @@ public class Shop extends HttpServlet {
 
         ShopAction shopAction = new ShopAction(conn);
 
-        String search = request.getParameter("search");
+        String keyword = request.getParameter("keyword");
 
-        request.setAttribute("search", search);
-
-        //display products with search
-        if (search != null) {
-            try {
-                shopAction.displayWithSearch(search, start_prd);
-            } catch (SQLException ex) {
-                Logger.getLogger(Shop.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        //set display with type
+        if (action.equals("search")) {
+            shopAction.displayWithSearch(keyword, 1);
+            request.getRequestDispatcher("/shop.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 }

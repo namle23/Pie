@@ -72,8 +72,6 @@ public class Account extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
 
-            Users user = new Users(username, password);
-
             HttpSession session = request.getSession(); //Set session for user
 
             session.setAttribute("username", username);

@@ -47,7 +47,7 @@
             </div>
 
             <div id="sidebar">
-                <%--<%@include file="parts/login.jsp"%>--%>
+                <%@include file="parts/login.jsp"%>
 
                 <%@include file="parts/cart.jsp"%>
 

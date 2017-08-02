@@ -40,9 +40,6 @@ a:hover {
     color: #f21a70;
 }
 
-
-/*Element*/
-
 .wrapper {
     width: 960px;
     margin: 0 auto;
@@ -487,7 +484,7 @@ ul.slidesjs-pagination li a {
 }
 
 div.products {
-    width: 190px;
+    width: 600px;
     height: 320px;
     margin: 8px;
     padding: 5px;
@@ -497,7 +494,7 @@ div.products {
     box-shadow: 2px 2px 15px #707070;
     color: #777777;
     word-wrap: break-word;
-    overflow: hidden;
+    overflow: scroll;
     position: relative;
 }
 

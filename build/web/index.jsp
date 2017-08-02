@@ -24,13 +24,11 @@
                         <div id="ribbon"></div>
                         <div id="slideshow">
                             <!--add images to slideshow-->
-                            <sql:setDataSource var="ds" dataSource="jdbc/dbs"></sql:setDataSource>
-                            <sql:query var="result" sql="SELECT * FROM images ORDER BY id LIMIT 8" dataSource="${ds}"></sql:query>
 
-                            <c:forEach var="img" items="${result.rows}">
-                                <c:set scope="application" var="imagename" value="${img.id}_slide.${img.image_extension}"></c:set>
-                                <img src="${pageContext.request.contextPath}/images/products/${imagename}">
+                            <c:forEach var="id" begin="1" end="7">
+                                <img src="${pageContext.request.contextPath}/images/products/${id}_slide.jpg">
                             </c:forEach>
+
                         </div>
                     </div>
 
@@ -39,14 +37,14 @@
                     <c:forEach var="i" begin="1" end="2">
                         <div class="articles-thumb">
                             <img src="images/articles/article1_thumb.jpg" width="100" height="100">
-                            <h3><a href="#">Lorem ipsum</a></h3>
+                            <h3><a href="article-detail.jsp">Lorem ipsum</a></h3>
                             <br>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed posuere interdum sem. </p>
                         </div>
 
                         <div class="articles-thumb">
                             <img src="images/articles/article2_thumb.jpg" width="100" height="100">
-                            <h3><a href="#">Lorem ipsum</a></h3>
+                            <h3><a href="article-detail.jsp">Lorem ipsum</a></h3>
                             <br>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed posuere interdum sem. </p>
                         </div>
@@ -55,7 +53,7 @@
             </div>
 
             <div id="sidebar">
-                <%--<%@include file="parts/login.jsp"%>--%>
+                <%@include file="parts/login.jsp"%>
 
                 <%@include file="parts/cart.jsp"%>
 

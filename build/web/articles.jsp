@@ -21,7 +21,7 @@
 
                 <div class="main-content content articles">
                     <div id="search">
-                        <form action="search-result.jsp"> <!--SEARCH RESULT GOES HERE-->
+                        <form action="search-result.jsp">
                             <input class="text" type="text" name="search-articles" placeholder="Search articles">
                             <input class="button" type="submit" value="Search">
                         </form>
@@ -52,7 +52,7 @@
             </div>
 
             <div id="sidebar">
-                <%--<%@include file="parts/login.jsp"%>--%>
+                <%@include file="parts/login.jsp"%>
 
                 <%@include file="parts/cart.jsp"%>
 
