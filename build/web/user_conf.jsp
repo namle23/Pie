@@ -19,7 +19,7 @@
                 <div class="main-content top"></div>
 
                 <div class="main-content content">
-                    <h1 class="register">Change user information</h1>
+                    <h1 class="register">User information</h1>
 
                     <!--CHANGE USER INFORMATION CODE GOES HERE-->
                 </div>

@@ -50,15 +50,15 @@ public class Orders implements Serializable {
     @Basic(optional = false)
     @Column(name = "prd_name")
     private String prdName;
-    @Basic(optional = false)
     @Column(name = "prd_quan")
-    private String prdQuan;
-    @Basic(optional = false)
+    private Integer prdQuan;
     @Column(name = "prd_cost")
-    private String prdCost;
+    private Integer prdCost;
     @Basic(optional = false)
     @Column(name = "status")
     private int status;
+
+    private Products product; //get product object
 
     public Orders() {
     }
@@ -67,7 +67,7 @@ public class Orders implements Serializable {
         this.id = id;
     }
 
-    public Orders(Integer id, String userId, String fullName, String address, String phone, String prdId, String prdName, String prdQuan, String prdCost, int status) {
+    public Orders(Integer id, String userId, String fullName, String address, String phone, String prdId, String prdName, int status) {
         this.id = id;
         this.userId = userId;
         this.fullName = fullName;
@@ -75,8 +75,6 @@ public class Orders implements Serializable {
         this.phone = phone;
         this.prdId = prdId;
         this.prdName = prdName;
-        this.prdQuan = prdQuan;
-        this.prdCost = prdCost;
         this.status = status;
     }
 
@@ -136,19 +134,20 @@ public class Orders implements Serializable {
         this.prdName = prdName;
     }
 
-    public String getPrdQuan() {
+    public Integer getPrdQuan() {
         return prdQuan;
     }
 
-    public void setPrdQuan(String prdQuan) {
+    public void setPrdQuan(Integer prdQuan) {
         this.prdQuan = prdQuan;
     }
 
-    public String getPrdCost() {
+    public Integer getPrdCost() {
+        Integer prdCost = product.getPrice() * prdQuan;
         return prdCost;
     }
 
-    public void setPrdCost(String prdCost) {
+    public void setPrdCost(Integer prdCost) {
         this.prdCost = prdCost;
     }
 
@@ -158,6 +157,14 @@ public class Orders implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
+    }
+
+    public Products getProduct() {
+        return product;
     }
 
     @Override

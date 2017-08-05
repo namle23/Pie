@@ -11,10 +11,23 @@ public final class test_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List<String> _jspx_dependants;
 
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_sql_setDataSource_var_dataSource_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_sql_query_var_sql_dataSource_nobody;
+
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public java.util.List<String> getDependants() {
     return _jspx_dependants;
+  }
+
+  public void _jspInit() {
+    _jspx_tagPool_sql_setDataSource_var_dataSource_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_sql_query_var_sql_dataSource_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+  }
+
+  public void _jspDestroy() {
+    _jspx_tagPool_sql_setDataSource_var_dataSource_nobody.release();
+    _jspx_tagPool_sql_query_var_sql_dataSource_nobody.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -45,6 +58,7 @@ public final class test_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
@@ -52,6 +66,10 @@ public final class test_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <title>JSP Page</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
+      out.write("        ");
+      if (_jspx_meth_sql_setDataSource_0(_jspx_page_context))
+        return;
+      out.write(" \n");
       out.write("\n");
       out.write("        ");
       beans.Products product = null;
@@ -67,9 +85,13 @@ public final class test_jsp extends org.apache.jasper.runtime.HttpJspBase
       org.apache.jasper.runtime.JspRuntimeLibrary.introspect(_jspx_page_context.findAttribute("product"), request);
       out.write("\n");
       out.write("\n");
-      out.write("            Type: ");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${product.type}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("        ");
+      if (_jspx_meth_sql_query_0(_jspx_page_context))
+        return;
       out.write("\n");
+      out.write("\n");
+      out.write("        ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${product.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("\n");
       out.write("    </body>\n");
       out.write("</html>\n");
@@ -84,5 +106,52 @@ public final class test_jsp extends org.apache.jasper.runtime.HttpJspBase
     } finally {
       _jspxFactory.releasePageContext(_jspx_page_context);
     }
+  }
+
+  private boolean _jspx_meth_sql_setDataSource_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  sql:setDataSource
+    org.apache.taglibs.standard.tag.rt.sql.SetDataSourceTag _jspx_th_sql_setDataSource_0 = (org.apache.taglibs.standard.tag.rt.sql.SetDataSourceTag) _jspx_tagPool_sql_setDataSource_var_dataSource_nobody.get(org.apache.taglibs.standard.tag.rt.sql.SetDataSourceTag.class);
+    _jspx_th_sql_setDataSource_0.setPageContext(_jspx_page_context);
+    _jspx_th_sql_setDataSource_0.setParent(null);
+    _jspx_th_sql_setDataSource_0.setDataSource(new String("jdbc/ds"));
+    _jspx_th_sql_setDataSource_0.setVar("ds");
+    int _jspx_eval_sql_setDataSource_0 = _jspx_th_sql_setDataSource_0.doStartTag();
+    if (_jspx_th_sql_setDataSource_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_sql_setDataSource_var_dataSource_nobody.reuse(_jspx_th_sql_setDataSource_0);
+      return true;
+    }
+    _jspx_tagPool_sql_setDataSource_var_dataSource_nobody.reuse(_jspx_th_sql_setDataSource_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_sql_query_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  sql:query
+    org.apache.taglibs.standard.tag.rt.sql.QueryTag _jspx_th_sql_query_0 = (org.apache.taglibs.standard.tag.rt.sql.QueryTag) _jspx_tagPool_sql_query_var_sql_dataSource_nobody.get(org.apache.taglibs.standard.tag.rt.sql.QueryTag.class);
+    _jspx_th_sql_query_0.setPageContext(_jspx_page_context);
+    _jspx_th_sql_query_0.setParent(null);
+    _jspx_th_sql_query_0.setVar("display");
+    _jspx_th_sql_query_0.setDataSource((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ds}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_sql_query_0.setSql((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("SELECT * FROM products WHERE id='${product.id}' ", java.lang.String.class, (PageContext)_jspx_page_context, null));
+    int[] _jspx_push_body_count_sql_query_0 = new int[] { 0 };
+    try {
+      int _jspx_eval_sql_query_0 = _jspx_th_sql_query_0.doStartTag();
+      if (_jspx_th_sql_query_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_sql_query_0[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_sql_query_0.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_sql_query_0.doFinally();
+      _jspx_tagPool_sql_query_var_sql_dataSource_nobody.reuse(_jspx_th_sql_query_0);
+    }
+    return false;
   }
 }

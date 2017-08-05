@@ -32,19 +32,19 @@
 
                     <h1 class="shop-title">Happy Chefs</h1>
 
-                    <sql:setDataSource dataSource="jdbc/dbs" var="ds"></sql:setDataSource> 
+                    <sql:setDataSource dataSource="jdbc/dbs" var="ds" />
 
-                    <jsp:useBean id="product" scope="session" class="beans.Products"></jsp:useBean>
-                    <jsp:setProperty name="product" property="*"></jsp:setProperty>
+                    <jsp:useBean id="product" scope="session" class="beans.Products" />
+                    <jsp:setProperty name="product" property="*" />
 
-                    <jsp:useBean id="search" scope="session" class="beans.Search"></jsp:useBean>
-                    <jsp:setProperty name="search" property="*"></jsp:setProperty>
+                    <jsp:useBean id="search" scope="session" class="beans.Search" />
+                    <jsp:setProperty name="search" property="*" />
 
                     <c:choose>
                         <c:when test="${product.type != null}">
                             <p class="prompt">Product type: <b>${product.type}</b></p>
 
-                            <sql:query var="display" dataSource="${ds}" sql="SELECT * FROM products WHERE type = '${product.type}' "></sql:query>
+                            <sql:query var="display" dataSource="${ds}" sql="SELECT * FROM products WHERE type = '${product.type}' " />
 
                             <%--display with type--%>
                             <c:if test='${product.type.equals("Cake")}'>
