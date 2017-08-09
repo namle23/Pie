@@ -24,7 +24,6 @@
                         <div id="ribbon"></div>
                         <div id="slideshow">
                             <!--add images to slideshow-->
-
                             <c:forEach var="id" begin="1" end="7">
                                 <img src="${pageContext.request.contextPath}/images/products/${id}_slide.jpg">
                             </c:forEach>

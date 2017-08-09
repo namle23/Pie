@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-import utils.ShopAction;
+import data.ShopDB;
 
 @WebServlet(name = "Shop", urlPatterns = {"/Shop"})
 public class Shop extends HttpServlet {
@@ -46,7 +46,7 @@ public class Shop extends HttpServlet {
             throw new ServletException();
         }
 
-        ShopAction shopAction = new ShopAction(conn);
+        ShopDB shopAction = new ShopDB(conn);
 
         String type = request.getParameter("type");
 
@@ -76,7 +76,7 @@ public class Shop extends HttpServlet {
             throw new ServletException();
         }
 
-        ShopAction shopAction = new ShopAction(conn);
+        ShopDB shopAction = new ShopDB(conn);
 
         String keyword = request.getParameter("keyword");
 

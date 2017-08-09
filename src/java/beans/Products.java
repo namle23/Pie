@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -120,6 +121,11 @@ public class Products implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getPriceCurrencyFormat() {
+        NumberFormat currency = NumberFormat.getCurrencyInstance();
+        return currency.format(price);
     }
 
     @Override

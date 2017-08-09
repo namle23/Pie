@@ -1,17 +1,17 @@
-package utils;
+package data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ShopAction {
+public class ShopDB {
 
     private Connection conn;
 
     private int limit = 6;
 
-    public ShopAction(Connection conn) {
+    public ShopDB(Connection conn) {
         this.conn = conn;
     }
 

@@ -1,15 +1,18 @@
-package utils;
+package data;
 
+import beans.Users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AccountAction {
+public class AccountDB {
 
-    private Connection conn;
+    ConnectionPool pool = ConnectionPool.getInstance();
 
-    public AccountAction(Connection conn) {
+    private Connection conn = pool.getConnection();
+
+    public AccountDB(Connection conn) {
         this.conn = conn;
     }
 
@@ -64,5 +67,28 @@ public class AccountAction {
         st = rs.next();
 
         return st;
+    }
+
+    public Users show(String username) throws SQLException {
+        Users user = null;
+
+        String sql = "SELECT * FROM USERS WHERE username=?";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+
+        ps.setString(1, username);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String fullname = rs.getString("full_name");
+            String address = rs.getString("address");
+            String phone = rs.getString("phone");
+
+            user = new Users(id, fullname, address, phone);
+        }
+
+        return user;
     }
 }

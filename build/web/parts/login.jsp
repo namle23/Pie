@@ -29,7 +29,10 @@
 
             <div class="side-content">
                 <h2 class="login">Hello ${sessionScope.username}</h2> 
-                <p>Your items: </p> <!--DISPLAY USER BOUGHT ITEMS-->
+                <p>Your items: </p><br>
+                <c:forEach var="i" items="${cart.items}">
+                    <h2>${i.product.name} - ${i.totalCurrencyFormat}</h2>
+                </c:forEach>
                 <form action="${pageContext.request.contextPath}/Account?action=dologout" method="post">
                     <input type="hidden" name="action" value="dologout">
                     <input class="btn" type="submit" value="Logout">

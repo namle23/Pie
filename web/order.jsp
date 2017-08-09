@@ -35,6 +35,10 @@
 
                     <h1 class="shop-title">Product information</h1>
 
+                    <c:if test="${addsuccess != null}">
+                        <h2 style="text-align: center;color: #F5FF06;">Order placed successfully</h2><br>
+                    </c:if>
+
                     <div class="info-order">
                         <h2>${p.name}</h2>
                         <img src="images/products/${p.id}.jpg" alt="${p.name}" width="622" />
@@ -43,7 +47,15 @@
                         <h3>Detail: </h3>
                         <p>${p.detail}</p><br>
                         <h3>Price: ${p.price}€</h3><br>
-                        <a class="btn order" href="${pageContext.request.contextPath}/Cart?action=add&cartid=${p.id}">Add to cart</a>
+                        <form action="${pageContext.request.contextPath}/Cart?action=add&cartid=${p.id}" method="post">
+                            <input type="hidden" name="action" value="add">
+                            <input class="btn order" type="submit" value="Add to cart">
+                            <a class="btn order" href="shop.jsp">Continue shopping</a>
+                        </form>
+                        <form action="${pageContext.request.contextPath}/Cart?action=show" method="get">
+                            <input type="hidden" name="action" value="show">
+                            <input class="btn reg" type="submit" value="To checkout page">
+                        </form>
                     </div>
                 </div>
             </div>
