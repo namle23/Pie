@@ -41,15 +41,20 @@ public final class cart_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("<!--COUNT THE AMOUNT OF ITEMS GOES HERE-->\n");
-      out.write("\n");
-      out.write("<div class=\"part\">\n");
-      out.write("    <div class=\"sidebar top\"></div>\n");
-      out.write("\n");
-      out.write("    <div class=\"side-content\">\n");
-      out.write("        <h2 class=\"cart\">Items: </h2>\n");
-      out.write("        <a class=\"btn reg\" href=\"cart.jsp\">List all items</a>\n");
-      out.write("    </div>\n");
+      out.write("<!--COUNT THE AMOUNT OF ITEMS GOES HERE-->\r\n");
+      out.write("\r\n");
+      out.write("<div class=\"part\">\r\n");
+      out.write("    <div class=\"sidebar top\"></div>\r\n");
+      out.write("\r\n");
+      out.write("    <div class=\"side-content\">\r\n");
+      out.write("        <h2 class=\"cart\">Items: </h2>\r\n");
+      out.write("        <form action=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("/Cart?action=show\" method=\"get\">\r\n");
+      out.write("            <input type=\"hidden\" name=\"action\" value=\"show\">\r\n");
+      out.write("            <input class=\"btn reg\" type=\"submit\" value=\"Your order\">\r\n");
+      out.write("        </form>\r\n");
+      out.write("    </div>\r\n");
       out.write("</div>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){

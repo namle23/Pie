@@ -86,6 +86,14 @@ public class Users implements Serializable {
         this.phone = phone;
     }
 
+    //contructor for cart user display
+    public Users(int id, String fullName, String address, String phone) {
+        this.id = id;
+        this.fullName = fullName;
+        this.address = address;
+        this.phone = phone;
+    }
+
     public String getMessage() {
         return message;
     }
