@@ -36,7 +36,7 @@
                     <h1 class="shop-title">Product information</h1>
 
                     <c:if test="${addsuccess != null}">
-                        <h2 style="text-align: center;color: #F5FF06;">Order placed successfully</h2><br>
+                        <h2 style="text-align: center;color: #F5FF06;">Product added to cart successfully</h2><br>
                     </c:if>
 
                     <div class="info-order">
