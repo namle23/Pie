@@ -6,6 +6,7 @@ import beans.Products;
 import data.CartDB;
 import data.ProductDB;
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -70,7 +71,7 @@ public class Cart extends HttpServlet {
             request.getSession().setAttribute("cart", cart);
         }
 
-        java.util.Date today = new java.util.Date();
+        Date today = new Date();
 
         Invoice invoice = new Invoice();
         invoice.setInvoiceDate(today);

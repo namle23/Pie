@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : articles
     Created on : Jul 11, 2017, 2:37:03 PM
     Author     : Nam
@@ -53,9 +53,7 @@
 
             <div id="sidebar">
                 <%@include file="parts/login.jsp"%>
-
                 <%@include file="parts/cart.jsp"%>
-
                 <%@include file="parts/menu.jsp"%>
             </div>
         </div>

@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : user_conf
     Created on : Jul 11, 2017, 11:59:19 PM
     Author     : Nam
@@ -28,9 +28,7 @@
 
             <div id="sidebar">
                 <%@include file="parts/login.jsp"%>
-
                 <%@include file="parts/cart.jsp"%>
-
                 <%@include file="parts/menu.jsp"%>
             </div>
         </div>

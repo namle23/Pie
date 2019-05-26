@@ -1,10 +1,12 @@
 package data;
 
 import beans.Users;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 
 public class AccountDB {
 
@@ -18,7 +20,7 @@ public class AccountDB {
 
     public boolean login(String username, String password) throws SQLException {
 
-        boolean st = false;
+        boolean st;
 
         String sql = "SELECT * FROM USERS WHERE username=? AND password=?";
 
@@ -49,12 +51,25 @@ public class AccountDB {
         ps.setString(5, newphone);
 
         ps.executeUpdate();
+        ps.close();
+    }
 
+    public void comment(String username, String comment, String photo,
+            String strDateFormatted) throws SQLException {
+        String sql = "INSERT INTO dbs.comments (username, comment, photo, date) VALUES (?, ?, ?, ?)";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+
+        ps.setString(1, username);
+        ps.setString(2, comment);
+        ps.setString(3, photo);
+        ps.setString(4, strDateFormatted);
+        ps.executeUpdate();
         ps.close();
     }
 
     public boolean exists(String username) throws SQLException {
-        boolean st = false;
+        boolean st;
 
         String sql = "SELECT * FROM USERS WHERE username=?";
 

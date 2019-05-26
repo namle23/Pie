@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : article-detail
     Created on : Jul 11, 2017, 2:13:53 PM
     Author     : Nam
@@ -39,18 +39,28 @@
                         <br><br>
                         Vivamus pellentesque pharetra erat, ac pretium magna porttitor et. In sit amet malesuada purus. Donec cursus massa ipsum, vitae mattis orci tempor et.
                         <br><br>
-                        Aliquam id quam rutrum, bibendum ligula non, semper neque. Vivamus tempus aliquam dolor eget fermentum. Vestibulum ac sodales neque. 
-                        <br><br><br>
+                        Aliquam id quam rutrum, bibendum ligula non, semper neque. Vivamus tempus aliquam dolor eget fermentum. Vestibulum ac sodales neque.
+                        <br><br>
                         <p class="article-source">Lorem ipsum</p>
                     </div>
+
+                    <c:if test="${username != null}">
+                        <div>
+                            <form action="${pageContext.request.contextPath}/Account?action=docomment" method="post" enctype="multipart/form-data">
+                                <p class="prompt">${message}</p>
+                                <input type="hidden" name="action" value="docomment">
+                                <textarea name="comment" rows="4" cols="60" placeholder="Enter your comment here"></textarea><br><br>
+                                <input type="file" name="photo" accept="image/*" size="50"/><br>
+                                <input class="btn" type="submit" value="Post"><br>
+                            </form><br>
+                        </div>
+                    </c:if>
                 </div>
             </div>
 
             <div id="sidebar">
                 <%@include file="parts/login.jsp"%>
-
                 <%@include file="parts/cart.jsp"%>
-
                 <%@include file="parts/menu.jsp"%>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <div id="search">
-    <form action="search-result.jsp">
-        <input type="text" name="search" placeholder="Search for a cake">
+    <form action="${pageContext.request.contextPath}/Search?action=search" method="get">
+        <input type="text" name="searchdata" placeholder="Search for a cake">
         <input type="submit" value="Search">
     </form>
 </div>

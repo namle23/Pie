@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : register
     Created on : Jul 11, 2017, 10:40:45 PM
     Author     : Nam
@@ -46,9 +46,7 @@
             </div>
 
             <div id="sidebar">
-
                 <%@include file="parts/cart.jsp"%>
-
                 <%@include file="parts/menu.jsp"%>
             </div>
         </div>

@@ -3,9 +3,16 @@ package controllers;
 import beans.Users;
 import data.AccountDB;
 import data.ConnectionPool;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -14,121 +21,178 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 @WebServlet(name = "Account", urlPatterns = {"/Account"})
 public class Account extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        
+
         if (action == null) {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String action = request.getParameter("action");
-        
+
         if (action == null) {
             return;
         }
-        
+
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         AccountDB accountDB = new AccountDB(conn);
-        
-        if (action.equals("dologin")) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            
-            HttpSession session = request.getSession(); //Set session for user
 
-            session.setAttribute("username", username);
-            session.setAttribute("password", "");
-            
-            try {
-                if (accountDB.login(username, password)) {
-                    
-                    Users user = accountDB.show(username);
-                    
-                    int id = user.getId();
-                    String fullname = user.getFullName();
-                    String address = user.getAddress();
-                    String phone = user.getPhone();
-                    
-                    session.setAttribute("id", id);
-                    session.setAttribute("fullname", fullname);
-                    session.setAttribute("address", address);
-                    session.setAttribute("phone", phone);
-                    session.setAttribute("user", user);
-                    
-                    request.getRequestDispatcher("/index.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("message", "Check username or password.");
-                    request.getRequestDispatcher("/login.jsp").forward(request, response);
+        switch (action) {
+            case "dologin": {
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                HttpSession session = request.getSession(); //Set session for user
+                session.setAttribute("username", username);
+                session.setAttribute("password", "");
+                try {
+                    if (accountDB.login(username, password)) {
+
+                        Users user = accountDB.show(username);
+
+                        int id = user.getId();
+                        String fullname = user.getFullName();
+                        String address = user.getAddress();
+                        String phone = user.getPhone();
+
+                        session.setAttribute("id", id);
+                        session.setAttribute("fullname", fullname);
+                        session.setAttribute("address", address);
+                        session.setAttribute("phone", phone);
+                        session.setAttribute("user", user);
+
+                        request.getRequestDispatcher("/index.jsp").forward(request, response);
+                    } else {
+                        request.setAttribute("message", "Check username or password.");
+                        request.getRequestDispatcher("/login.jsp").forward(request, response);
+                    }
+                } catch (SQLException ex) {
+                    request.getRequestDispatcher("/register.jsp").forward(request, response);
                 }
-            } catch (SQLException ex) {
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+                break;
             }
-        } else if (action.equals("register")) {
-            String newusername = request.getParameter("newusername");
-            String newpassword1 = request.getParameter("newpassword1");
-            String newpassword2 = request.getParameter("newpassword2");
-            String newfullname = request.getParameter("newfullname");
-            String newaddress = request.getParameter("newaddress");
-            String newphone = request.getParameter("newphone");
-            
-            request.setAttribute("newusername", newusername);
-            request.setAttribute("newpassword1", "");
-            request.setAttribute("newpassword2", "");
-            request.setAttribute("newfullname", newfullname);
-            request.setAttribute("newaddress", newaddress);
-            request.setAttribute("newphone", newphone);
-            
-            request.setAttribute("message", "");
-            
-            if (!newpassword1.equals(newpassword2)) {
-                //Password not match
-                request.setAttribute("message", "Password not match.");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
-            } else {
-                Users user = new Users(newusername, newpassword1, newfullname, newaddress, newphone);
-                
-                if (!user.validate()) {
-                    //Password wrong format
-                    request.setAttribute("message", user.getMessage());
+            case "register":
+                String newusername = request.getParameter("newusername");
+                String newpassword1 = request.getParameter("newpassword1");
+                String newpassword2 = request.getParameter("newpassword2");
+                String newfullname = request.getParameter("newfullname");
+                String newaddress = request.getParameter("newaddress");
+                String newphone = request.getParameter("newphone");
+                request.setAttribute("newusername", newusername);
+                request.setAttribute("newpassword1", "");
+                request.setAttribute("newpassword2", "");
+                request.setAttribute("newfullname", newfullname);
+                request.setAttribute("newaddress", newaddress);
+                request.setAttribute("newphone", newphone);
+                request.setAttribute("message", "");
+                if (!newpassword1.equals(newpassword2)) {
+                    //Password not match
+                    request.setAttribute("message", "Password not match.");
                     request.getRequestDispatcher("/register.jsp").forward(request, response);
                 } else {
-                    try {
-                        if (accountDB.exists(newusername)) {
-                            //Username exists
-                            request.setAttribute("message", "Username is taken.");
-                            request.getRequestDispatcher("/register.jsp").forward(request, response);
-                        } else {
-                            accountDB.create(newusername, newpassword1, newfullname, newaddress, newphone);
-                            request.getRequestDispatcher("/success.jsp").forward(request, response);
+                    Users user = new Users(newusername, newpassword1, newfullname, newaddress, newphone);
+
+                    if (!user.validate()) {
+                        //Password wrong format
+                        request.setAttribute("message", user.getMessage());
+                        request.getRequestDispatcher("/register.jsp").forward(request, response);
+                    } else {
+                        try {
+                            if (accountDB.exists(newusername)) {
+                                //Username exists
+                                request.setAttribute("message", "Username is taken.");
+                                request.getRequestDispatcher("/register.jsp").forward(request, response);
+                            } else {
+                                accountDB.create(newusername, newpassword1, newfullname, newaddress, newphone);
+                                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                            }
+                        } catch (SQLException e) {
+                            request.getRequestDispatcher("/error.jsp").forward(request, response);
                         }
-                    } catch (SQLException e) {
-                        request.getRequestDispatcher("/error.jsp").forward(request, response);
                     }
                 }
+                break;
+            case "dologout":
+                request.getSession().invalidate();
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
+                break;
+            case "docomment": {
+                HttpSession session = request.getSession(); //Set session
+                String username = (String) session.getAttribute("username"); //get username
+                ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
+                Map<String, InputStream> fileMap = new HashMap<>();
+
+                try {
+                    List<FileItem> multifiles = sf.parseRequest(request);
+
+                    StringBuilder comment = new StringBuilder();
+                    StringBuilder photo = new StringBuilder();
+                    StringBuilder strDateFormatted = new StringBuilder();
+
+                    multifiles.forEach((item) -> {
+                        if (item.getFieldName().equals("comment")) {
+                            comment.append(item.getString()); //get comment value
+                        } else if (item.getFieldName().equals("photo")) {
+                            photo.append(item.getName());
+
+                            try {
+                                //gives file name
+                                fileMap.put(item.getName(), item.getInputStream());
+//C:\\Users\\namle\\uploads\\
+                                item.write(new File("..\\..\\..\\" + item.getName()));
+                            } catch (IOException ex) {
+                                Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (Exception ex) {
+                                Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    });
+
+                    DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                    LocalDateTime now = LocalDateTime.now();
+                    strDateFormatted.append(now);
+
+                    try {
+                        if (comment.toString().equals("")) {
+                            //Empty comment error
+                            request.setAttribute("message", "Write something my friend.");
+                            request.getRequestDispatcher("/article-detail.jsp").forward(request, response);
+                        } else {
+                            accountDB.comment(username, comment.toString(), photo.toString(), strDateFormatted.toString());
+                            request.setAttribute("message", "Very nice comment.");
+                            request.getRequestDispatcher("/article-detail.jsp").forward(request, response);
+                        }
+                    } catch (SQLException ex) {
+                        request.getRequestDispatcher("/register.jsp").forward(request, response);
+                    }
+                } catch (FileUploadException | IOException | ServletException ex) {
+                    Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
             }
-            
-        } else if (action.equals("dologout")) {
-            request.getSession().invalidate();
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            default:
+                break;
         }
-        
+
         try {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }

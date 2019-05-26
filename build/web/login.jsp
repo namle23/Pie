@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : login
     Created on : Jul 11, 2017, 9:49:45 PM
     Author     : Nam
@@ -30,7 +30,7 @@
                         <input type="text" name="username" placeholder="username"><br>
                         <input type="password" name="password" placeholder="password"><br>
                         <input class="btn" type="submit" value="Login"><br>
-                        <a class="btn" href="admin/index.jsp">Admin login</a>
+                        <!--<a class="btn" href="admin/index.jsp">Admin login</a>-->
                         <!--<a class="btn" href="#">Forgot password?</a>-->
                     </form>
                 </div>
@@ -38,7 +38,6 @@
 
             <div id="sidebar">
                 <%@include file="parts/cart.jsp"%>
-
                 <%@include file="parts/menu.jsp"%>
             </div>
         </div>

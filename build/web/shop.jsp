@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : shop
     Created on : Jul 11, 2017, 11:47:20 PM
     Author     : Nam
@@ -53,126 +53,111 @@
                                     <c:forEach var="d" items="${display.rows}">
                                         <h3>${product.name}</h3>
                                         <a href="order.jsp?id=${d.id}">
-                                            <img src="images/products/${d.id}_slide.jpg" width="350" height="190">
+                                            <img src="images/products/${d.id}_slide.jpg" width="580" height="190">
                                         </a>
                                         <p><b>Type: </b>${d.type}</p>
                                         <p><b>Price: </b>${d.price}€</p>
                                         <a class="detail" href="order.jsp?id=${d.id}">Detail</a>
                                         <!--<a class="cart" href="${pageContext.request.contextPath}/Order?action=add&cartid=${product.id}">Cart</a>-->
                                     </c:forEach>
-                                </c:if>
-
-                                <c:if test='${product.type.equals("Cup")}'>
-
-                                    <div class="products">
-                                        <c:forEach var="d" items="${display.rows}">
-                                            <h3>${product.name}</h3>
-                                            <a href="order.jsp?id=${d.id}">
-                                                <img src="images/products/${d.id}_slide.jpg" width="350" height="190">
-                                            </a>
-                                            <p><b>Type: </b>${d.type}</p>
-                                            <p><b>Price: </b>${d.price}€</p>
-                                            <a class="detail" href="order.jsp?id=${d.id}">Detail</a>
-                                            <!--<a class="cart" href="${pageContext.request.contextPath}/Order?action=add&cartid=${product.id}">Cart</a>-->
-                                        </c:forEach>
-                                    </c:if> 
-                                </c:when>
-
-                                <c:when test="${search.keyword != null}">
-                                    <p class="prompt">Search result: <b>${search.keyword}</b></p>
-
-                                    <sql:query var="display" dataSource="${ds}" sql="SELECT * FROM products WHERE name LIKE '%${search.keyword}%' "></sql:query>
-
-                                    <c:if test="${display == null}">
-
-                                        <sql:query var="results" dataSource="${ds}" sql="SELECT * FROM products ORDER BY id"></sql:query>
-
-                                            <div class="products">
-                                            <c:forEach var="product" items="${results.rows}">
-                                                <h3>${product.name}</h3>
-                                                <a href="order.jsp?id=${product.id}">
-                                                    <img src="images/products/${product.id}_slide.jpg" width="350" height="190">
-                                                </a>
-                                                <p><b>Type: </b>${product.type}</p>
-                                                <p><b>Price: </b>${product.price}€</p>
-                                                <a class="detail" href="order.jsp?id=${product.id}">Detail</a>
-                                                <!--<a class="cart" href="${pageContext.request.contextPath}/Order?action=add&cartid=${product.id}">Cart</a>-->
-                                            </c:forEach>
-                                        </c:if>
-
-                                        <c:if test="${display != null}">
-
-                                            <sql:query var="results" dataSource="${ds}" sql="SELECT * FROM products ORDER BY id"></sql:query>
-
-                                                <div class="products">
-                                                <c:forEach var="product" items="${results.rows}">
-                                                    <h3>${product.name}</h3>
-                                                    <a href="order.jsp?id=${product.id}">
-                                                        <img src="images/products/${product.id}_slide.jpg" width="350" height="190">
-                                                    </a>
-                                                    <p><b>Type: </b>${product.type}</p>
-                                                    <p><b>Price: </b>${product.price}€</p>
-                                                    <a class="detail" href="order.jsp?id=${product.id}">Detail</a>
-                                                    <!--<a class="cart" href="${pageContext.request.contextPath}/Order?action=add&cartid=${product.id}">Cart</a>-->
-                                                </c:forEach>
-                                            </c:if> 
-                                        </c:when>
-
-                                        <%--display general without type or search--%>
-                                        <c:when test="${product.type == null && search.keyword == null}">
-                                            <sql:query var="results" dataSource="${ds}" sql="SELECT * FROM products ORDER BY id"></sql:query>
-
-                                                <div class="products">
-                                                <c:forEach var="product" items="${results.rows}">
-                                                    <h3>${product.name}</h3>
-                                                    <a href="order.jsp?id=${product.id}">
-                                                        <img src="images/products/${product.id}_slide.jpg" width="350" height="190">
-                                                    </a>
-                                                    <p><b>Type: </b>${product.type}</p>
-                                                    <p><b>Price: </b>${product.price}€</p>
-                                                    <a class="detail" href="order.jsp?id=${product.id}">Detail</a>
-                                                    <!--<a class="cart" href="${pageContext.request.contextPath}/Order?action=add&cartid=${product.id}">Cart</a>-->
-                                                </c:forEach>
-                                            </c:when>
-                                        </c:choose>
-
-                                    </div>
-
-                                    <%--pagination --%>
-                                    <ul class="pages-divide">
-                                        <c:choose>
-                                            <c:when test="${type !=null}">
-                                                <li><a class="nav-pre" href="#">Previous</a></li>
-                                                    <c:forEach var="x" begin="1" end="8">
-                                                    <li><a href="shop.jsp?page=${x}&type=">${x}</a></li> 
-                                                    <!--HAVE TO ADD PAGINATION HERE-->
-                                                </c:forEach>
-                                                <li><a class="nav-next" href="#">Next</a></li>
-                                                </c:when>
-
-                                            <c:otherwise>
-                                                <li><a class="nav-pre" href="#">Previous</a></li>
-                                                    <c:forEach var="x" begin="1" end="8">
-                                                    <li><a href="shop.jsp?page=${x}&type=">${x}</a></li> 
-                                                    <!--HAVE TO ADD PAGINATION HERE-->
-                                                </c:forEach>
-                                                <li><a class="nav-next" href="#">Next</a></li>
-                                                </c:otherwise>
-                                            </c:choose>
-                                    </ul>
-
                                 </div>
+                            </c:if>
+
+                            <c:if test='${product.type.equals("Cup")}'>
+
+                                <div class="products">
+                                    <c:forEach var="d" items="${display.rows}">
+                                        <h3>${product.name}</h3>
+                                        <a href="order.jsp?id=${d.id}">
+                                            <img src="images/products/${d.id}_slide.jpg" width="580" height="190">
+                                        </a>
+                                        <p><b>Type: </b>${d.type}</p>
+                                        <p><b>Price: </b>${d.price}€</p>
+                                        <a class="detail" href="order.jsp?id=${d.id}">Detail</a>
+                                        <!--<a class="cart" href="${pageContext.request.contextPath}/Order?action=add&cartid=${product.id}">Cart</a>-->
+                                    </c:forEach>
+                                </div>
+                            </c:if>
+                        </c:when>
+
+                        <c:when test='${search.keyword != null || search.keyword.equals("")}'>
+                            <p class="prompt">Search result: <b>${search.keyword}</b></p>
+                            <p>SELECT * FROM products WHERE name LIKE '%${search.keyword}%' </p>
+
+                            <sql:query var="display" dataSource="${ds}" sql="SELECT * FROM products WHERE name LIKE '%${search.keyword}%' "></sql:query>
+
+                            <c:if test="${display != null}">
+                                <div class="products">
+                                    <sql:query var="results" dataSource="${ds}" sql="SELECT * FROM products WHERE name LIKE '%${search.keyword}%' "></sql:query>
+
+                                    <c:forEach var="product" items="${results.rows}">
+                                        <h3>${product.name}</h3>
+                                        <a href="order.jsp?id=${product.id}">
+                                            <img src="images/products/${product.id}_slide.jpg" width="580" height="190">
+                                        </a>
+                                        <p><b>Type: </b>${product.type}</p>
+                                        <p><b>Price: </b>${product.price}€</p>
+                                        <a class="detail" href="order.jsp?id=${product.id}">Detail</a>
+                                        <!--<a class="cart" href="${pageContext.request.contextPath}/Order?action=add&cartid=${product.id}">Cart</a>-->
+                                    </c:forEach>
+                                </div>
+                            </c:if>
+                        </c:when>
+
+                        <%--display general without type or search--%>
+                        <c:when test="${product.type == null && search.keyword == null}">
+
+                            <sql:query var="results" dataSource="${ds}" sql="SELECT * FROM products ORDER BY id"></sql:query>
+                                <p>display general without type or search</p>
+                                <div class="products">
+                                <c:forEach var="product" items="${results.rows}">
+                                    <h3>${product.name}</h3>
+                                    <a href="order.jsp?id=${product.id}">
+                                        <img src="images/products/${product.id}_slide.jpg" width="580" height="190">
+                                    </a>
+                                    <p><b>Type: </b>${product.type}</p>
+                                    <p><b>Price: </b>${product.price}€</p>
+                                    <a class="detail" href="order.jsp?id=${product.id}">Detail</a>
+                                    <!--<a class="cart" href="${pageContext.request.contextPath}/Order?action=add&cartid=${product.id}">Cart</a>-->
+                                </c:forEach>
                             </div>
+                        </c:when>
+                    </c:choose>
 
-                            <div id="sidebar">
+                </div>
 
-                                <%@include file="parts/login.jsp"%>
+                <%--pagination --%>
+                <ul class="pages-divide">
+                    <c:choose>
+                        <c:when test="${type !=null}">
+                            <li><a class="nav-pre" href="#">Previous</a></li>
+                                <c:forEach var="x" begin="1" end="8">
+                                <li><a href="shop.jsp?page=${x}&type=">${x}</a></li>
+                                <!--HAVE TO ADD PAGINATION HERE-->
+                            </c:forEach>
+                            <li><a class="nav-next" href="#">Next</a></li>
+                            </c:when>
 
-                                <%@include file="parts/cart.jsp"%>
+                        <c:otherwise>
+                            <li><a class="nav-pre" href="#">Previous</a></li>
+                                <c:forEach var="x" begin="1" end="8">
+                                <li><a href="shop.jsp?page=${x}&type=">${x}</a></li>
+                                <!--HAVE TO ADD PAGINATION HERE-->
+                            </c:forEach>
+                            <li><a class="nav-next" href="#">Next</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                </ul>
 
-                                <%@include file="parts/menu.jsp"%>
-                            </div>
-                        </div>
-                        <%@include file="parts/footer.jsp"%>
-                        </body>
-                        </html>
+            </div>
+        </div>
+
+        <div id="sidebar">
+            <%@include file="parts/login.jsp"%>
+            <%@include file="parts/cart.jsp"%>
+            <%@include file="parts/menu.jsp"%>
+        </div>
+    </div>
+    <%@include file="parts/footer.jsp"%>
+</body>
+</html>
