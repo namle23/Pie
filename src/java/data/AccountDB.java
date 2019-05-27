@@ -54,9 +54,10 @@ public class AccountDB {
         ps.close();
     }
 
+//    query comment to db
     public void comment(String username, String comment, String photo,
             String strDateFormatted) throws SQLException {
-        String sql = "INSERT INTO dbs.comments (username, comment, photo, date) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO dbs.comments (username, comment, photo, date) VALUES (?, ?, ?, ?)"; //user wildcard to feed comment from user input
 
         PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -65,7 +66,7 @@ public class AccountDB {
         ps.setString(3, photo);
         ps.setString(4, strDateFormatted);
         ps.executeUpdate();
-        ps.close();
+        ps.close(); //attemp to close connection after query done
     }
 
     public boolean exists(String username) throws SQLException {

@@ -44,6 +44,7 @@
                         <p class="article-source">Lorem ipsum</p>
                     </div>
 
+                    <%--Display comment input only when user is logged in--%>
                     <c:if test="${username != null}">
                         <div>
                             <form action="${pageContext.request.contextPath}/Account?action=docomment" method="post" enctype="multipart/form-data">

@@ -131,30 +131,33 @@ public class Account extends HttpServlet {
                 request.getSession().invalidate();
                 response.sendRedirect(request.getContextPath() + "/index.jsp");
                 break;
-            case "docomment": {
+            case "docomment": { //Comment action
                 HttpSession session = request.getSession(); //Set session
-                String username = (String) session.getAttribute("username"); //get username
+                String username = (String) session.getAttribute("username"); //Get username
                 ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
-                Map<String, InputStream> fileMap = new HashMap<>();
+                Map<String, InputStream> fileMap = new HashMap<>(); //HashMap to store photo's detail
 
                 try {
-                    List<FileItem> multifiles = sf.parseRequest(request);
+                    List<FileItem> multifiles = sf.parseRequest(request); //Store all stream input in List
 
+                    //StringBuilder to store each input value
                     StringBuilder comment = new StringBuilder();
                     StringBuilder photo = new StringBuilder();
                     StringBuilder strDateFormatted = new StringBuilder();
 
+                    //Iterate through all the input
                     multifiles.forEach((item) -> {
+                        //If input is from field "comment"
                         if (item.getFieldName().equals("comment")) {
-                            comment.append(item.getString()); //get comment value
-                        } else if (item.getFieldName().equals("photo")) {
+                            comment.append(item.getString()); //Get comment value
+                        } else if (item.getFieldName().equals("photo")) { //If input is from "photo" field
                             photo.append(item.getName());
 
                             try {
                                 //gives file name
-                                fileMap.put(item.getName(), item.getInputStream());
-//C:\\Users\\namle\\uploads\\
-                                item.write(new File("..\\..\\..\\" + item.getName()));
+                                fileMap.put(item.getName(), item.getInputStream()); //Store photo's detail
+
+                                item.write(new File("C:\\Users\\namle\\uploads" + item.getName())); //Create file (upload file) to provided location
                             } catch (IOException ex) {
                                 Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (Exception ex) {
@@ -163,16 +166,18 @@ public class Account extends HttpServlet {
                         }
                     });
 
+                    //Create and record the posted time
                     DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                     LocalDateTime now = LocalDateTime.now();
                     strDateFormatted.append(now);
 
                     try {
+                        //Force user to write a comment
                         if (comment.toString().equals("")) {
                             //Empty comment error
                             request.setAttribute("message", "Write something my friend.");
                             request.getRequestDispatcher("/article-detail.jsp").forward(request, response);
-                        } else {
+                        } else { //Proceed if comment is written
                             accountDB.comment(username, comment.toString(), photo.toString(), strDateFormatted.toString());
                             request.setAttribute("message", "Very nice comment.");
                             request.getRequestDispatcher("/article-detail.jsp").forward(request, response);

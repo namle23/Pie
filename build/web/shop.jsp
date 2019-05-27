@@ -80,16 +80,15 @@
                             </c:if>
                         </c:when>
 
-                        <c:when test='${search.keyword != null || search.keyword.equals("")}'>
-                            <p class="prompt">Search result: <b>${search.keyword}</b></p>
-                            <p>SELECT * FROM products WHERE name LIKE '%${search.keyword}%' </p>
+                        <%--Search function, compare keyword and show if there's matches--%>
+                        <c:when test='${search.keyword != null || search.keyword.equals("")}'> <!--Display search result when search keyword is provided-->
+                            <p class="prompt">Search result: <b>"${search.keyword}"</b></p> <!--Display the provided keyword-->
 
-                            <sql:query var="display" dataSource="${ds}" sql="SELECT * FROM products WHERE name LIKE '%${search.keyword}%' "></sql:query>
+                            <sql:query var="results" dataSource="${ds}" sql="SELECT * FROM products WHERE name LIKE '%${search.keyword}%' "></sql:query> <!--query to db-->
 
-                            <c:if test="${display != null}">
+                            <c:if test="${results != null}"> <!--Display search result only if result is not empty-->
+                                <%--Feed the result into detail information--%>
                                 <div class="products">
-                                    <sql:query var="results" dataSource="${ds}" sql="SELECT * FROM products WHERE name LIKE '%${search.keyword}%' "></sql:query>
-
                                     <c:forEach var="product" items="${results.rows}">
                                         <h3>${product.name}</h3>
                                         <a href="order.jsp?id=${product.id}">
@@ -102,13 +101,15 @@
                                     </c:forEach>
                                 </div>
                             </c:if>
+
+                            <c:if test="${results == null}"> <!--Empty if result is empty-->
+                            </c:if>
                         </c:when>
 
                         <%--display general without type or search--%>
                         <c:when test="${product.type == null && search.keyword == null}">
 
                             <sql:query var="results" dataSource="${ds}" sql="SELECT * FROM products ORDER BY id"></sql:query>
-                                <p>display general without type or search</p>
                                 <div class="products">
                                 <c:forEach var="product" items="${results.rows}">
                                     <h3>${product.name}</h3>
