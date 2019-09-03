@@ -5,9 +5,11 @@
         <group>
             <file>file:/G:/Study/Netbeans/PieT/Pie/src/java/data/AccountDB.java</file>
             <file>file:/G:/Study/Netbeans/PieT/Pie/web/articles.jsp</file>
+            <file>file:/G:/Study/Netbeans/PieT/Pie/web/META-INF/context.xml</file>
             <file>file:/G:/Study/Netbeans/PieT/Pie/src/java/controllers/Account.java</file>
+            <file>file:/G:/Study/Netbeans/PieT/Pie/web/shop.jsp</file>
             <file>file:/G:/Study/Netbeans/PieT/Pie/web/article-detail.jsp</file>
-            <file>file:/G:/Study/Netbeans/PieT/Pie/web/WEB-INF/web.xml</file>
+            <file>file:/G:/Study/Netbeans/PieT/Pie/src/java/data/ConnectionPool.java</file>
         </group>
     </open-files>
 </project-private>
