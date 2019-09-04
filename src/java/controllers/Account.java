@@ -82,6 +82,7 @@ public class Account extends HttpServlet {
                         request.getRequestDispatcher("/login.jsp").forward(request, response);
                     }
                 } catch (SQLException ex) {
+                    log(ex + " DOLOGIN");
                     request.getRequestDispatcher("/register.jsp").forward(request, response);
                 }
                 break;
@@ -121,8 +122,9 @@ public class Account extends HttpServlet {
                                 accountDB.create(newusername, newpassword1, newfullname, newaddress, newphone);
                                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                             }
-                        } catch (SQLException e) {
-                            request.getRequestDispatcher("/error.jsp").forward(request, response);
+                        } catch (SQLException ex) {
+                            log(ex + " REGISTER");
+                            request.getRequestDispatcher("/register.jsp").forward(request, response);
                         }
                     }
                 }
@@ -183,9 +185,11 @@ public class Account extends HttpServlet {
                             request.getRequestDispatcher("/article-detail.jsp").forward(request, response);
                         }
                     } catch (SQLException ex) {
+                        log(ex + " COMMENT");
                         request.getRequestDispatcher("/register.jsp").forward(request, response);
                     }
                 } catch (FileUploadException | IOException | ServletException ex) {
+                    log(ex + "");
                     Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;

@@ -40,7 +40,7 @@ public class AccountDB {
 
     public void create(String newusername, String newpassword,
             String newfullname, String newaddress, String newphone) throws SQLException {
-        String sql = "INSERT INTO dbs.users (username, password, full_name, address, phone) VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO users (username, password, full_name, address, phone) VALUES (?,?,?,?,?);";
 
         PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -57,7 +57,7 @@ public class AccountDB {
 //    query comment to db
     public void comment(String username, String comment, String photo,
             String strDateFormatted) throws SQLException {
-        String sql = "INSERT INTO dbs.comments (username, comment, photo, date) VALUES (?, ?, ?, ?)"; //user wildcard to feed comment from user input
+        String sql = "INSERT INTO comments (username, comment, photo, date) VALUES (?, ?, ?, ?)"; //user wildcard to feed comment from user input
 
         PreparedStatement ps = conn.prepareStatement(sql);
 

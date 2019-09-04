@@ -19,7 +19,7 @@
 
                     <a class="btn reg" href="register.jsp">Register</a>
                 </form>
-            </div> 
+            </div>
         </div>
     </c:when>
 
@@ -28,7 +28,7 @@
             <div class="sidebar top"></div>
 
             <div class="side-content">
-                <h2 class="login">Hello ${sessionScope.username}</h2> 
+                <h2 class="login">Hello ${sessionScope.username}</h2>
                 <p>Your items: </p><br>
                 <c:forEach var="i" items="${cart.items}">
                     <h2>${i.product.name} - ${i.totalCurrencyFormat}</h2>

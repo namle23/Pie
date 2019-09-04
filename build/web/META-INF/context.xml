@@ -5,8 +5,8 @@
 
               username="e1500959" password="AwNQ2Hpah8cn" driverClassName="com.mysql.jdbc.Driver"
               url="jdbc:mysql://mysql.cc.puv.fi/e1500959_dbs"/>
-    username="root" password="root" driverClassName="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://localhost:3306/dbs"/>
+    <!--            username="root" password="root" driverClassName="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/dbs"/>-->
 </Context>
 
 
